@@ -1,17 +1,32 @@
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TestTelekom {
+import logger.Logger;
+import static java.util.logging.Level.*;
 
-    @BeforeClass
-    private void startTest() {
-        System.out.println(common.Framework.localTime());
+public class TestTelekom {
+    @BeforeClass(alwaysRun = true)
+    private void startTests() {
+        Logger.log.log(INFO,"Telekom tests are started!");
+    }
+
+    @BeforeMethod
+    private void startMethods(ITestResult result) {
+        Logger.log.log(INFO, "Test started: " + result.getTestClass().getName() + "." + result.getMethod().getMethodName());
     }
 
     @Test
     public void helloWorld() {
-        System.out.println("Hello World!");
-
+        System.out.print("Hello World!");
     }
+
+    @Test
+    public void helloWorld2() {
+        System.out.print("Hello World2!");
+    }
+
+
 
 }
