@@ -11,21 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import java.util.logging.FileHandler;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+import java.util.logging.*;
 
 import static java.util.logging.Level.*;
 
 
 /**
- *
- * @author Kovács Ferenc
+ * @author Ferenc Kovács
  */
 public class Logger {
-    public final static java.util.logging.Logger log = java.util.logging.Logger.getLogger(Logger.class.getName());
+    public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Logger.class.getName());
 
     private static FileHandler fh = null;
     private static ConsoleHandler ch = null;
@@ -51,8 +46,8 @@ public class Logger {
                             + (record.getLevel() == SEVERE ? "ERROR" : record.getLevel())
                             + " - "
                             + record.getSourceClassName().substring(
-                            record.getSourceClassName().lastIndexOf(".")+1,
-                            record.getSourceClassName().length())
+                                record.getSourceClassName().lastIndexOf(".")+1,
+                                record.getSourceClassName().length())
                             + "."
                             + record.getSourceMethodName()
                             + "() - "
@@ -64,7 +59,7 @@ public class Logger {
             fh.setFormatter(new Formatter() {
                 @Override
                 public String format(LogRecord record) {
-                    SimpleDateFormat logTime = new SimpleDateFormat("MMddyyyy_HHmmss");
+                    SimpleDateFormat logTime = new SimpleDateFormat("yyyyMMdd_HHmmss");
                     Calendar cal = new GregorianCalendar();
                     cal.setTimeInMillis(record.getMillis());
                     return logTime.format(cal.getTime())
@@ -72,12 +67,12 @@ public class Logger {
                             + (record.getLevel() == SEVERE ? "ERROR" : record.getLevel())
                             + ";"
                             + record.getSourceClassName().substring(
-                            record.getSourceClassName().lastIndexOf(".")+1,
-                            record.getSourceClassName().length())
+                                record.getSourceClassName().lastIndexOf(".")+1,
+                                record.getSourceClassName().length())
                             + "."
                             + record.getSourceMethodName()
                             + "();"
-                            + record.getMessage().replace("\n", "") + "\n";
+                            + record.getMessage().replace("\n", " ") + "\n";
                 }
             });
         } catch (Exception e) {
@@ -91,7 +86,7 @@ public class Logger {
             root.removeHandler(handlers[i]);
         }
 
-        log.addHandler(fh);
-        log.addHandler(ch);
+        logger.addHandler(fh);
+        logger.addHandler(ch);
     }
 }
