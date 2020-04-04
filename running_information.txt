@@ -2,7 +2,7 @@ mvn clean install -U -DsuiteXMLPath="suite.xml"
 
 mvn test -DsuiteXMLPath="suite.xml"
 
-Ha üres a suiteXMLpath paraméter, akkor az összes teszt lefut.
+Ha üres a suiteXMLpath paraméter, akkor az összes teszt lefut, de megadása kötelező.
 
 A suite.xml fájlnak tartalmaznia kell az összes teszt nevét és true vagy false értékekkel tudjuk engedélyezni vagy blokkolni egy-egy teszt futását.
 Pl.
