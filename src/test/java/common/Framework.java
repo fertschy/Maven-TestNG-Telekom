@@ -52,8 +52,10 @@ public class Framework {
         //logger.log(INFO, "Start request.");
 
         //Ha az api hívás után a response kód 200 minden esetben kerüljön a konzolra egy üzenet, hogy „OK”, ha 400 vagy 404 akkor „NOTOK”.
-        if (res.statusCode() == 200) { logger.log(INFO, "OK"); }
-        else if (res.statusCode() == 400 || res.statusCode() == 404) { logger.log(SEVERE, "NOTOK"); }
+        switch (res.statusCode()) {
+            case 200: logger.log(INFO, "OK"); break;
+            case 400: case 404: logger.log(SEVERE, "NOTOK"); break;
+        }
 
         return res;
     }
