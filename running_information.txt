@@ -1,0 +1,3 @@
+mvn clean install -U -DsuiteXMLPath="c:\ab a\akarmi.xml"
+
+mvn test -DsuiteXMLPath="c:\ab a\akarmi.xml"

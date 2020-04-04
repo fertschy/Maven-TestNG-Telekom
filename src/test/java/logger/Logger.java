@@ -22,16 +22,17 @@ import static java.util.logging.Level.*;
 public class Logger {
     public final static java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Logger.class.getName());
 
-    private static FileHandler fh = null;
+    //private static FileHandler fh = null;
     private static ConsoleHandler ch = null;
 
     static {
-        File f = new File("logs/");
+        /*File f = new File("logs/");
         if (!f.exists() && !f.isDirectory()) {
             f.mkdir();
         }
+        */
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        //SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_HHmmss");
 
         try {
             ch = new ConsoleHandler();
@@ -55,6 +56,7 @@ public class Logger {
                 }
             });
 
+            /*
             fh = new FileHandler("logs/telekom_" + format.format(Calendar.getInstance().getTime()) + ".csv");
             fh.setFormatter(new Formatter() {
                 @Override
@@ -75,6 +77,7 @@ public class Logger {
                             + record.getMessage().replace("\n", " ") + "\n";
                 }
             });
+            */
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,7 +89,7 @@ public class Logger {
             root.removeHandler(handlers[i]);
         }
 
-        logger.addHandler(fh);
+        //logger.addHandler(fh);
         logger.addHandler(ch);
     }
 }

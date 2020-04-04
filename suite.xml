@@ -1,0 +1,6 @@
+<?xml version="1.0"?>  
+<testSuite>
+  <telekomHomepage>true</telekomHomepage>
+  <telekomWeb>false</telekomWeb>
+  <telekomWebshop>true</telekomWebshop>
+</testSuite>
