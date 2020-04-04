@@ -1,14 +1,23 @@
+Futtató parancs:
 mvn clean install -U -DsuiteXMLPath="suite.xml"
 
-mvn test -DsuiteXMLPath="suite.xml"
+Ha üres a suiteXMLpath paraméter, akkor az összes teszt lefut, de a megadása kötelező:
+mvn clean install -U -DsuiteXMLPath
 
-Ha üres a suiteXMLpath paraméter, akkor az összes teszt lefut, de megadása kötelező.
+A suite.xml fájlnak tartalmaznia kell a futtatandó tesztek nevét és true vagy false értékekkel tudjuk engedélyezni vagy
+blokkolni egy-egy teszt futását. Amelyik teszt nem szerepel a fájlban, azt automatikusan blokkolja.
 
-A suite.xml fájlnak tartalmaznia kell az összes teszt nevét és true vagy false értékekkel tudjuk engedélyezni vagy blokkolni egy-egy teszt futását.
-Pl.
+1. Példa.
 <?xml version="1.0"?>
 <testSuite>
   <telekomHomepage>true</telekomHomepage>
   <telekomWeb>false</telekomWeb>
   <telekomWebshop>true</telekomWebshop>
+</testSuite>
+
+2. Példa.
+<?xml version="1.0"?>
+<testSuite>
+  <telekomHomepage>true</telekomHomepage>
+  <telekomWeb>false</telekomWeb>
 </testSuite>

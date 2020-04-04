@@ -3,7 +3,8 @@ import static common.Framework.*;
 import static logger.Logger.logger;
 import static java.util.logging.Level.*;
 
-import io.restassured.response.Response;
+import io.restassured.RestAssured;
+import io.restassured.config.SSLConfig;
 
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -35,14 +36,26 @@ public class TestTelekom {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.parse(file);
-            telekomHomePageRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomHomepage").item(0).getTextContent());
-            telekomWebRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomWeb").item(0).getTextContent());
-            telekomWebshopRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomWebshop").item(0).getTextContent());
+            try {
+                telekomHomePageRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomHomepage").item(0).getTextContent());
+            } catch (NullPointerException npe) { }
+            try {
+                telekomWebRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomWeb").item(0).getTextContent());
+            } catch (NullPointerException npe) { }
+            try {
+                telekomWebshopRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomWebshop").item(0).getTextContent());
+            } catch (NullPointerException npe) { }
         } catch (Exception e) {
+            e.printStackTrace();
             telekomHomePageRunningFlag = true;
             telekomWebRunningFlag = true;
             telekomWebshopRunningFlag = true;
         }
+
+        //This statement is initialize the Rest Assured library to satisfy the response time expectations,
+        //because the first request is always slow. It's a workaround.
+        //If you remove this statement, the first test will be unreasonably slow.
+        RestAssured.given().when().get("http://dummy.restapiexample.com").then().extract().response().getBody();
     }
 
     @BeforeMethod()

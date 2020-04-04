@@ -10,6 +10,7 @@ import static io.restassured.RestAssured.given;
 
 import static java.util.logging.Level.*;
 import static logger.Logger.logger;
+import static org.hamcrest.Matchers.lessThan;
 
 public class Framework {
     public static String localDateTime() {
@@ -36,20 +37,18 @@ public class Framework {
                 // - A request method
                 // - A request header
                 // - A request body
-                log().uri().
-                log().method().
-                log().headers().
-                log().body().
+                log().uri().log().method().log().headers().log().body().
                 get(url).
                 then().
                 //Minden RESPONSE esetén kerüljön logolásra a konzolra:
                 // - A response kód
                 // - A response body
-                log().status().
-                log().body().
+                log().status().log().body().
                 extract().
                 response();
-        //logger.log(INFO, "Start request.");
+        //logger.log(INFO, "End request.");
+
+        logger.log(INFO, "Response time:" + res.getTime());
 
         //Ha az api hívás után a response kód 200 minden esetben kerüljön a konzolra egy üzenet, hogy „OK”, ha 400 vagy 404 akkor „NOTOK”.
         switch (res.statusCode()) {
