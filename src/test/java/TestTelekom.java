@@ -46,7 +46,6 @@ public class TestTelekom {
                 telekomWebshopRunningFlag = Boolean.valueOf(document.getElementsByTagName("telekomWebshop").item(0).getTextContent());
             } catch (NullPointerException npe) { }
         } catch (Exception e) {
-            e.printStackTrace();
             telekomHomePageRunningFlag = true;
             telekomWebRunningFlag = true;
             telekomWebshopRunningFlag = true;
