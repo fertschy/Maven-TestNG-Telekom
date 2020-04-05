@@ -48,7 +48,7 @@ public class Framework {
                 response();
         //logger.log(INFO, "End request.");
 
-        logger.log(INFO, "Response time:" + res.getTime());
+        logger.log(INFO, "Response time: " + res.getTime()) + "ms";
 
         //Ha az api hívás után a response kód 200 minden esetben kerüljön a konzolra egy üzenet, hogy „OK”, ha 400 vagy 404 akkor „NOTOK”.
         switch (res.statusCode()) {
